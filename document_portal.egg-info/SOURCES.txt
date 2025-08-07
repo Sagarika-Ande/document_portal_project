@@ -11,6 +11,7 @@ logger/custom_logger.py
 prompt/__init__.py
 prompt/prompt_library.py
 src/__init__.py
+src/mymodule.py
 src/doccompare/__init__.py
 src/multidocchat/__init__.py
 src/singledocchat/__init__.py
