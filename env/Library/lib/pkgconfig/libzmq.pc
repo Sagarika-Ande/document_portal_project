@@ -1,0 +1,12 @@
+prefix=c:/Users/Sagarika/Document_Portal/env/Library
+exec_prefix=c:/Users/Sagarika/Document_Portal/env/Library
+libdir=c:/Users/Sagarika/Document_Portal/env/Library/lib
+includedir=c:/Users/Sagarika/Document_Portal/env/Library/include
+
+Name: libzmq
+Description: 0MQ c++ library
+Version: 4.3.5
+Libs: -L${libdir} -lzmq
+Libs.private: 
+Requires.private: 
+Cflags: -I${includedir} 
