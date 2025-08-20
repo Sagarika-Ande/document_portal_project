@@ -8,7 +8,7 @@
     "vc >=14.2,<15",
     "vc14_runtime >=14.29.30133"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1",
   "files": [
     "Library/bin/sqlite3.dll",
     "Library/bin/sqlite3.exe",
@@ -19,12 +19,12 @@
   "fn": "sqlite-3.50.2-hda9a48d_1.conda",
   "license": "blessing",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1",
     "type": 1
   },
   "md5": "9796bc1868a29e4ec53a054cc84870ba",
   "name": "sqlite",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\sqlite-3.50.2-hda9a48d_1.conda",
   "paths_data": {
     "paths": [
       {

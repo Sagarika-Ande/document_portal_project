@@ -1,6 +1,6 @@
 {
  "argv": [
-  "c:/Users/Sagarika/Document_Portal/env\\python.exe",
+  "python",
   "-m",
   "ipykernel_launcher",
   "-f",

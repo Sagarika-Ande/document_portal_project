@@ -8,7 +8,7 @@
   "depends": [
     "ucrt >=10.0.20348.0"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10",
   "files": [
     "Library/bin/concrt140.dll",
     "Library/bin/msvcp140.dll",
@@ -38,12 +38,12 @@
   "fn": "vc14_runtime-14.44.35208-h4927774_10.conda",
   "license": "LicenseRef-MicrosoftVisualCpp2015-2022Runtime",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10",
     "type": 1
   },
   "md5": "13296ea2847729c01c316b089cb28337",
   "name": "vc14_runtime",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\vc14_runtime-14.44.35208-h4927774_10.conda",
   "paths_data": {
     "paths": [
       {

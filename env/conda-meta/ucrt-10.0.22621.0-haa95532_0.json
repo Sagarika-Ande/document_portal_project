@@ -6,7 +6,7 @@
     "vs2015_runtime >=14.29.30037"
   ],
   "depends": [],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0",
   "files": [
     "Library/bin/api-ms-win-core-console-l1-1-0.dll",
     "Library/bin/api-ms-win-core-console-l1-2-0.dll",
@@ -98,12 +98,12 @@
   "fn": "ucrt-10.0.22621.0-haa95532_0.conda",
   "license": "LicenseRef-MicrosoftWindowsSDK10",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0",
     "type": 1
   },
   "md5": "15e1b10231d7d236520501fcfb440f31",
   "name": "ucrt",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\ucrt-10.0.22621.0-haa95532_0.conda",
   "paths_data": {
     "paths": [
       {

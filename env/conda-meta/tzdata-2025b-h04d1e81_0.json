@@ -4,7 +4,7 @@
   "channel": "https://repo.anaconda.com/pkgs/main/win-64",
   "constrains": [],
   "depends": [],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0",
   "files": [
     "share/zoneinfo/Africa/Abidjan",
     "share/zoneinfo/Africa/Accra",
@@ -616,13 +616,13 @@
   "fn": "tzdata-2025b-h04d1e81_0.conda",
   "license": "CC-PDDC OR BSD-3-Clause",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0",
     "type": 1
   },
   "md5": "1d027393db3427ab22a02aa44a56f143",
   "name": "tzdata",
   "noarch": "generic",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\tzdata-2025b-h04d1e81_0.conda",
   "package_type": "noarch_generic",
   "paths_data": {
     "paths": [

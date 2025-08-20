@@ -7,7 +7,7 @@
     "vc >=14.2,<15.0a0",
     "vs2015_runtime >=14.29.30133,<15.0a0"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0",
   "files": [
     "Library/bin/expat.dll",
     "Library/bin/libexpat.dll",
@@ -28,12 +28,12 @@
   "fn": "expat-2.7.1-h8ddb27b_0.conda",
   "license": "MIT",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0",
     "type": 1
   },
   "md5": "011c43ed4c203fe09147107af9fd1b5a",
   "name": "expat",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\expat-2.7.1-h8ddb27b_0.conda",
   "paths_data": {
     "paths": [
       {

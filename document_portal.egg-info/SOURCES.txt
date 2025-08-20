@@ -6,6 +6,7 @@ document_portal.egg-info/dependency_links.txt
 document_portal.egg-info/top_level.txt
 exception/__init__.py
 exception/custom_exception.py
+exception/custom_exception_archive.py
 logger/__init__.py
 logger/custom_logger.py
 prompt/__init__.py

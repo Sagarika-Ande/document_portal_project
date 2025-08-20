@@ -6,17 +6,17 @@
   "depends": [
     "vc14_runtime >=14.42.34433"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc-14.3-h2df5915_10",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\vc-14.3-h2df5915_10",
   "files": [],
   "fn": "vc-14.3-h2df5915_10.conda",
   "license": "BSD-3-Clause",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc-14.3-h2df5915_10",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\vc-14.3-h2df5915_10",
     "type": 1
   },
   "md5": "064c529f6f598fb2225446f76687a170",
   "name": "vc",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vc-14.3-h2df5915_10.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\vc-14.3-h2df5915_10.conda",
   "paths_data": {
     "paths": [],
     "paths_version": 1

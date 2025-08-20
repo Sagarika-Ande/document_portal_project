@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: 0BSD
 # Author: Lasse Collin
 
-prefix=C:/Users/Sagarika/Document_Portal/env/Library
+prefix=D:/Users/asset/document_portal_project/env/Library
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

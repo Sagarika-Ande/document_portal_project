@@ -1550,6 +1550,12 @@ class Client:
                     curr_dict["outputs"] = _orjson.Fragment(op.outputs)
                 if op.events:
                     curr_dict["events"] = _orjson.Fragment(op.events)
+                if op.extra:
+                    curr_dict["extra"] = _orjson.Fragment(op.extra)
+                if op.error:
+                    curr_dict["error"] = _orjson.Fragment(op.error)
+                if op.serialized:
+                    curr_dict["serialized"] = _orjson.Fragment(op.serialized)
                 if op.attachments:
                     logger.warning(
                         "Attachments are not supported when use_multipart_endpoint "
@@ -2995,8 +3001,11 @@ class Client:
         )
 
     def list_shared_examples(
-        self, share_token: str, *, example_ids: Optional[list[ID_TYPE]] = None,
-        limit: Optional[int] = None
+        self,
+        share_token: str,
+        *,
+        example_ids: Optional[list[ID_TYPE]] = None,
+        limit: Optional[int] = None,
     ) -> Iterator[ls_schemas.Example]:
         """Get shared examples.
 
@@ -8090,10 +8099,35 @@ def _dataset_examples_path(api_url: str, dataset_id: ID_TYPE) -> str:
 def _construct_url(api_url: str, pathname: str) -> str:
     if pathname.startswith("http"):
         return pathname
-    elif pathname.startswith("/"):
-        return api_url.rstrip("/") + pathname
+    if api_url.startswith("https://"):
+        http = "https://"
+        api_url = api_url[len("https://") :]
+    elif api_url.startswith("http://"):
+        http = "http://"
+        api_url = api_url[len("http://") :]
     else:
-        return api_url.rstrip("/") + "/" + pathname
+        raise ValueError(
+            f"api_url must start with 'http://' or 'https://'. Received {api_url=}"
+        )
+
+    api_parts = api_url.rstrip("/").split("/")
+    path_parts = pathname.lstrip("/").split("/")
+
+    if not api_parts:
+        raise ValueError(
+            "Must specify non-empty api_url or pathname must be a full url. "
+            f"Received {api_url=}, {pathname=}"
+        )
+    if not path_parts:
+        return api_url
+
+    if path_parts[0] == "api":
+        if api_parts[-1] == "api":
+            api_parts = api_parts[:-1]
+        elif api_parts[-2:] == ["api", "v1"]:
+            api_parts = api_parts[:-2]
+    parts = api_parts + path_parts
+    return http + "/".join(p for p in parts if p)
 
 
 def dump_model(model) -> dict[str, Any]:

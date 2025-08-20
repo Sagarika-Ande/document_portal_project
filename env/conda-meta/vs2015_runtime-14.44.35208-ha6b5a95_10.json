@@ -6,17 +6,17 @@
   "depends": [
     "vc14_runtime >=14.44.35208"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10",
   "files": [],
   "fn": "vs2015_runtime-14.44.35208-ha6b5a95_10.conda",
   "license": "BSD-3-Clause",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10",
     "type": 1
   },
   "md5": "58665d8e606897afb52a202669673c40",
   "name": "vs2015_runtime",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\vs2015_runtime-14.44.35208-ha6b5a95_10.conda",
   "paths_data": {
     "paths": [],
     "paths_version": 1

@@ -7,7 +7,7 @@
     "vc >=14.2,<15.0a0",
     "vs2015_runtime >=14.29.30133,<15.0a0"
   ],
-  "extracted_package_dir": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1",
+  "extracted_package_dir": "D:\\Users\\asset\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1",
   "files": [
     "Library/bin/liblzma.dll",
     "Library/bin/lzmadec.exe",
@@ -57,12 +57,12 @@
   "fn": "xz-5.6.4-h4754444_1.conda",
   "license": "LGPL-2.1-or-later and GPL-2.0-or-later and 0BSD",
   "link": {
-    "source": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1",
+    "source": "D:\\Users\\asset\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1",
     "type": 1
   },
   "md5": "6036999a3a2c7a3e3739d6b9351fcb0b",
   "name": "xz",
-  "package_tarball_full_path": "C:\\Users\\Sagarika\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1.conda",
+  "package_tarball_full_path": "D:\\Users\\asset\\miniconda3\\pkgs\\xz-5.6.4-h4754444_1.conda",
   "paths_data": {
     "paths": [
       {
@@ -246,7 +246,7 @@
         "path_type": "hardlink",
         "prefix_placeholder": "C:/b/abs_127uq9r7f9/croot/xz_1739468293592/_h_env",
         "sha256": "dbe3494f7db3697dfd6167eb9f44b211b58df9613a8f6b2670a1d6ba78f0593b",
-        "sha256_in_prefix": "81f20d85fb4417f486ac172bf5e777fec8bd686145788f9172dd7300b89075b6",
+        "sha256_in_prefix": "24cd421a84fe0f4c41669477b6e626c342a929fc8343c8c89d20439888c8393a",
         "size_in_bytes": 426
       },
       {
