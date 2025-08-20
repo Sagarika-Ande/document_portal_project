@@ -1,0 +1,2 @@
+{"session_id": "test_session", "session_path": "D:\\Users\\asset\\document_portal_project\\data\\document_analysis\\test_session", "timestamp": "2025-08-20T11:12:17.894184Z", "level": "info", "event": "PDFHandler initialized"}
+{"file": "NIPS-2017-attention-is-all-you-need-Paper.pdf", "save_path": "D:\\Users\\asset\\document_portal_project\\data\\document_analysis\\test_session\\NIPS-2017-attention-is-all-you-need-Paper.pdf", "session_id": "test_session", "timestamp": "2025-08-20T11:12:17.911325Z", "level": "info", "event": "PDF saved successfully"}
