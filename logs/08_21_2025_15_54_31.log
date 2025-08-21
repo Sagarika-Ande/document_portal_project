@@ -1,0 +1,2 @@
+{"session_path": "data\\document_compare\\session_20250821_102431_f9156420", "timestamp": "2025-08-21T10:24:31.201841Z", "level": "info", "event": "DocumentComparator initialized"}
+{"error": "Only PDF files are allowed.", "session": "session_20250821_102431_f9156420", "timestamp": "2025-08-21T10:24:31.201841Z", "level": "error", "event": "Error saving PDF files"}

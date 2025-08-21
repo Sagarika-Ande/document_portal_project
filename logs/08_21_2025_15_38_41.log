@@ -1,0 +1,1 @@
+{"error": "'DocumentIngestion' object has no attribute 'session_path'", "timestamp": "2025-08-21T10:08:41.622212Z", "level": "error", "event": "Error saving PDF files"}

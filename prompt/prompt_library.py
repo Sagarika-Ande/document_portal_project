@@ -1,74 +1,41 @@
-# Prepare prompt template
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-prompt = ChatPromptTemplate.from_template("""
+# Prompt for document analysis
+document_analysis_prompt = ChatPromptTemplate.from_template("""
 You are a highly capable assistant trained to analyze and summarize documents.
 Return ONLY valid JSON matching the exact schema below.
 
 {format_instructions}
 
+                                                            
 Analyze this document:
 {document_text}
+""")
+
+# Prompt for document comparison
+document_comparison_prompt = ChatPromptTemplate.from_template("""
+You will be provided with content from two PDFs. Your tasks are as follows:
+
+1. Compare the content in two PDFs
+2. Identify the difference in PDF and note down the page number 
+3. The output you provide must be page wise comparison content 
+4. If any page do not have any change, mention as 'NO CHANGE' 
+
+Input documents:
+
+{combined_docs}
+
+Your response should follow this format:
+
+{format_instruction}
 """)
 
 
 
 
-"""import os
-import sys
-from utils.model_loader import ModelLoader
-from logger.custom_logger import CustomLogger
-from exception.custom_exception import DocumentPortalException
-from model.models import *
-from langchain_core.output_parsers import JsonOutputParser
-from langchain.output_parsers import OutputFixingParser
-from prompt.prompt_library import *
-
-class DocumentAnalyzer:
+# Central dictionary to register prompts
+PROMPT_REGISTRY = {
+    "document_analysis": document_analysis_prompt,
+    "document_comparison": document_comparison_prompt,
     
-    Analyzes documents using a pre-trained model.
-    Automatically logs all actions and supports session-based organization.
-
-    def __init__(self):
-        self.log = CustomLogger().get_logger(__name__)
-        try:
-            self.loader=ModelLoader()
-            self.llm=self.loader.load_llm()
-            
-            # Prepare parsers
-            self.parser = JsonOutputParser(pydantic_object=Metadata)
-            self.fixing_parser = OutputFixingParser.from_llm(parser=self.parser, llm=self.llm)
-            
-            self.prompt = prompt
-            
-            self.log.info("DocumentAnalyzer initialized successfully")
-            
-            
-        except Exception as e:
-            self.log.error(f"Error initializing DocumentAnalyzer: {e}")
-            raise DocumentPortalException("Error in DocumentAnalyzer initialization", sys)
-        
-        
-    
-    def analyze_document(self, document_text:str)-> dict:
-        
-        Analyze a document's text and extract structured metadata & summary.
-    
-        try:
-            chain = self.prompt | self.llm | self.fixing_parser
-            
-            self.log.info("Meta-data analysis chain initialized")
-
-            response = chain.invoke({
-                "format_instructions": self.parser.get_format_instructions(),
-                "document_text": document_text
-            })
-
-            self.log.info("Metadata extraction successful", keys=list(response.keys()))
-            
-            return response
-
-        except Exception as e:
-            self.log.error("Metadata analysis failed", error=str(e))
-            raise DocumentPortalException("Metadata extraction failed") from e
-            """
+}
