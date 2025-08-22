@@ -1,0 +1,19 @@
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T07:19:44.295196Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T07:19:44.299199Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2025-08-22T07:19:44.299199Z", "level": "info", "event": "Loading embedding model..."}
+Loading faiss with AVX512 support.
+Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+Loading faiss with AVX2 support.
+Successfully loaded faiss with AVX2 support.
+Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T07:19:44.373114Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T07:19:44.376155Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2025-08-22T07:19:44.376155Z", "level": "info", "event": "Loading LLM..."}
+{"provider": "google", "model": "gemini-2.0-flash", "temperature": 0, "max_tokens": 2048, "timestamp": "2025-08-22T07:19:44.376155Z", "level": "info", "event": "Loading LLM"}
+{"class_name": "ChatGoogleGenerativeAI", "timestamp": "2025-08-22T07:19:44.380198Z", "level": "info", "event": "LLM loaded successfully"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:19:44.381012Z", "level": "info", "event": "Created history-aware retriever"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:19:44.383120Z", "level": "info", "event": "Created RAG chain"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:19:44.388035Z", "level": "info", "event": "Wrapped chain with message history"}
+{"session_id": "test_conversational_rag", "error": "module 'streamlit' has no attribute 'session_state'", "timestamp": "2025-08-22T07:19:44.388430Z", "level": "error", "event": "Failed to access session history"}
+{"error": "Error in [D:\\Users\\asset\\document_portal_project\\src\\single_document_chat\\retrieval.py] at line [63] | Message: Failed to retrieve session history\nTraceback:\nTraceback (most recent call last):\n  File \"D:\\Users\\asset\\document_portal_project\\src\\single_document_chat\\retrieval.py\", line 63, in _get_session_history\n    if \"store\" not in st.session_state:\nAttributeError: module 'streamlit' has no attribute 'session_state'\n", "session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:19:44.388430Z", "level": "error", "event": "Failed to invoke conversational RAG"}

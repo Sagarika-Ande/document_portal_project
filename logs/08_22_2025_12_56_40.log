@@ -1,0 +1,19 @@
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T07:26:41.553124Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T07:26:41.558111Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2025-08-22T07:26:41.559112Z", "level": "info", "event": "Loading embedding model..."}
+Loading faiss with AVX512 support.
+Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+Loading faiss with AVX2 support.
+Successfully loaded faiss with AVX2 support.
+Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T07:26:41.640453Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T07:26:41.643352Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2025-08-22T07:26:41.644340Z", "level": "info", "event": "Loading LLM..."}
+{"provider": "google", "model": "gemini-2.0-flash", "temperature": 0, "max_tokens": 2048, "timestamp": "2025-08-22T07:26:41.645338Z", "level": "info", "event": "Loading LLM"}
+{"class_name": "ChatGoogleGenerativeAI", "timestamp": "2025-08-22T07:26:41.651363Z", "level": "info", "event": "LLM loaded successfully"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:26:41.652338Z", "level": "info", "event": "Created history-aware retriever"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:26:41.654358Z", "level": "info", "event": "Created RAG chain"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:26:41.659137Z", "level": "info", "event": "Wrapped chain with message history"}
+{"session_id": "test_conversational_rag", "timestamp": "2025-08-22T07:26:41.662130Z", "level": "info", "event": "New chat session history created"}
+{"session_id": "test_conversational_rag", "user_input": "What is the significance of the attention mechanism? can you explain it in simple terms?", "answer_preview": "The attention mechanism maps a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. It computes", "timestamp": "2025-08-22T07:26:44.122412Z", "level": "info", "event": "Chain invoked successfully"}

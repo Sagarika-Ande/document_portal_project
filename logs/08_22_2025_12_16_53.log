@@ -1,0 +1,23 @@
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T06:46:53.757235Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T06:46:53.759237Z", "level": "info", "event": "Configuration loaded successfully"}
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T06:46:53.782426Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T06:46:53.786516Z", "level": "info", "event": "Configuration loaded successfully"}
+{"temp_path": "data\\single_document_chat", "faiss_path": "faiss_index", "timestamp": "2025-08-22T06:46:53.787430Z", "level": "info", "event": "SingleDocIngestor initialized"}
+{"filename": "D:\\Users\\asset\\document_portal_project\\data\\single_document_chat\\NIPS-2017-attention-is-all-you-need-Paper.pdf", "timestamp": "2025-08-22T06:46:53.788427Z", "level": "info", "event": "PDF saved for ingestion"}
+{"count": 11, "timestamp": "2025-08-22T06:46:54.544813Z", "level": "info", "event": "PDF files loaded"}
+{"count": 48, "timestamp": "2025-08-22T06:46:54.547712Z", "level": "info", "event": "Documents split into chunks"}
+{"timestamp": "2025-08-22T06:46:54.548179Z", "level": "info", "event": "Loading embedding model..."}
+Loading faiss with AVX512 support.
+Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+Loading faiss with AVX2 support.
+Successfully loaded faiss with AVX2 support.
+Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+{"faiss_path": "faiss_index", "timestamp": "2025-08-22T06:46:58.483960Z", "level": "info", "event": "FAISS index created and saved"}
+{"retriever_type": "<class 'langchain_core.vectorstores.base.VectorStoreRetriever'>", "timestamp": "2025-08-22T06:46:58.484958Z", "level": "info", "event": "Retriever created successfully"}
+{"available_keys": ["GOOGLE_API_KEY", "GROQ_API_KEY"], "timestamp": "2025-08-22T06:46:58.487053Z", "level": "info", "event": "Environment variables validated"}
+{"config_keys": ["faiss_db", "embedding_model", "retriever", "llm"], "timestamp": "2025-08-22T06:46:58.490063Z", "level": "info", "event": "Configuration loaded successfully"}
+{"timestamp": "2025-08-22T06:46:58.490063Z", "level": "info", "event": "Loading LLM..."}
+{"provider": "google", "model": "gemini-2.0-flash", "temperature": 0, "max_tokens": 2048, "timestamp": "2025-08-22T06:46:58.490063Z", "level": "info", "event": "Loading LLM"}
+{"class_name": "ChatGoogleGenerativeAI", "timestamp": "2025-08-22T06:46:58.495673Z", "level": "info", "event": "LLM loaded successfully"}
+{"error": "'contextualize_question'", "session_id": "test_conversational_rag", "timestamp": "2025-08-22T06:46:58.495673Z", "level": "error", "event": "Error initializing ConversationalRAG"}
