@@ -23,7 +23,7 @@ src/multi_document_chat/contextualcompression.py
 src/multi_document_chat/data_ingestion.py
 src/multi_document_chat/evaluation.py
 src/multi_document_chat/mmr.py
-src/multi_document_chat/retreival.py
+src/multi_document_chat/retrieval.py
 src/single_document_chat/__init__.py
 src/single_document_chat/data_ingestion.py
 src/single_document_chat/evaluation.py
