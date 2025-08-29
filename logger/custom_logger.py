@@ -15,6 +15,9 @@ class CustomLogger:
         self.log_file_path = os.path.join(self.logs_dir, log_file)
 
     def get_logger(self, name=__file__):
+
+
+
         logger_name = os.path.basename(name)
 
         # Configure logging for console + file (both JSON)

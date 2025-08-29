@@ -16,7 +16,7 @@ packages = [
     "fastapi",
     "uvicorn",
     "python-multipart",
-    "docx2txt"
+    "docx2txt",
 ]
 for pkg in packages:
     try:
