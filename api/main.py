@@ -23,9 +23,11 @@ FAISS_INDEX_NAME = os.getenv("FAISS_INDEX_NAME", "index")  # <--- keep consisten
 
 app = FastAPI(title="Document Portal API", version="0.1")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+"""BASE_DIR = Path(__file__).resolve().parent.parent
+
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+print(BASE_DIR)
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))"""
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,6 +36,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+#serve static & templates
+app.mount("/static", StaticFiles(directory="../static"), name="0.1")
+templates= Jinja2Templates(directory="../templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_ui(request: Request):
@@ -124,7 +130,8 @@ async def chat_query(
             raise HTTPException(status_code=404, detail=f"FAISS index not found at: {index_dir}")
 
         rag = ConversationalRAG(session_id=session_id)
-        rag.load_retriever_from_faiss(index_dir, k=k, index_name=FAISS_INDEX_NAME)  # build retriever + chain
+        rag.load_retriever_from_faiss(index_dir)  # build retriever + chain
+        #k=k, index_name=FAISS_INDEX_NAME
         response = rag.invoke(question, chat_history=[])
 
         return {
