@@ -16,7 +16,7 @@ class DocumentAnalyzer:
     Automatically logs all actions and supports session-based organization.
     """
     def __init__(self):
-        self.log = CustomLogger().get_logger(__name__)
+        #self.log = CustomLogger().get_logger(__name__)
         try:
             self.loader=ModelLoader()
             self.llm=self.loader.load_llm()
