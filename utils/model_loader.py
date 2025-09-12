@@ -1,16 +1,13 @@
-import json
 import os
 import sys
+import json
 from dotenv import load_dotenv
 from utils.config_loader import load_config
-from .config_loader import load_config
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
-#from langchain_openai import ChatOpenAI
-from logger.custom_logger import CustomLogger
+from logger import GLOBAL_LOGGER as log
 from exception.custom_exception import DocumentPortalException
-log = CustomLogger().get_logger(__name__)
+
 
 class ApiKeyManager:
     REQUIRED_KEYS = ["GROQ_API_KEY", "GOOGLE_API_KEY"]
@@ -82,76 +79,64 @@ class ModelLoader:
             log.error("Error loading embedding model", error=str(e))
             raise DocumentPortalException("Failed to load embedding model", sys)
 
-        
     def load_llm(self):
-    
-        """Load and return the LLM model."""
-        
-        """Load LLM dynamically based on provider in config."""
-        
+        """
+        Load and return the configured LLM model.
+        """
         llm_block = self.config["llm"]
+        provider_key = os.getenv("LLM_PROVIDER", "google")
 
-        log.info("Loading LLM...")
-        
-        provider_key = os.getenv("LLM_PROVIDER", "google")  # Default groq
         if provider_key not in llm_block:
-            log.error("LLM provider not found in config", provider_key=provider_key)
-            raise ValueError(f"Provider '{provider_key}' not found in config")
+            log.error("LLM provider not found in config", provider=provider_key)
+            raise ValueError(f"LLM provider '{provider_key}' not found in config")
 
         llm_config = llm_block[provider_key]
         provider = llm_config.get("provider")
         model_name = llm_config.get("model_name")
         temperature = llm_config.get("temperature", 0.2)
         max_tokens = llm_config.get("max_output_tokens", 2048)
-        
-        log.info("Loading LLM", provider=provider, model=model_name, temperature=temperature, max_tokens=max_tokens)
+
+        log.info("Loading LLM", provider=provider, model=model_name)
 
         if provider == "google":
-            llm=ChatGoogleGenerativeAI(
+            return ChatGoogleGenerativeAI(
                 model=model_name,
                 google_api_key=self.api_key_mgr.get("GOOGLE_API_KEY"),
                 temperature=temperature,
                 max_output_tokens=max_tokens
             )
-            return llm
 
         elif provider == "groq":
-            llm=ChatGroq(
+            return ChatGroq(
                 model=model_name,
                 api_key=self.api_key_mgr.get("GROQ_API_KEY"), #type: ignore
                 temperature=temperature,
             )
-            return llm
-            
+
         # elif provider == "openai":
         #     return ChatOpenAI(
         #         model=model_name,
-        #         api_key=self.api_keys["OPENAI_API_KEY"],
+        #         api_key=self.api_key_mgr.get("OPENAI_API_KEY"),
         #         temperature=temperature,
         #         max_tokens=max_tokens
         #     )
-        
+
         else:
             log.error("Unsupported LLM provider", provider=provider)
             raise ValueError(f"Unsupported LLM provider: {provider}")
-        
-    
-    
+
+
 if __name__ == "__main__":
     loader = ModelLoader()
-    
-    # Test embedding model loading
+
+    # Test Embedding
     embeddings = loader.load_embeddings()
     print(f"Embedding Model Loaded: {embeddings}")
-    
-    # Test the ModelLoader
-    result=embeddings.embed_query("Hello, how are you?")
+    result = embeddings.embed_query("Hello, how are you?")
     print(f"Embedding Result: {result}")
-    
-    # Test LLM loading based on YAML config
+
+    # Test LLM
     llm = loader.load_llm()
     print(f"LLM Loaded: {llm}")
-    
-    # Test the ModelLoader
-    result=llm.invoke("Hello, how are you?")
+    result = llm.invoke("Hello, how are you?")
     print(f"LLM Result: {result.content}")
