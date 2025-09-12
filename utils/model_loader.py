@@ -54,43 +54,34 @@ class ApiKeyManager:
 
 
 class ModelLoader:
-    
     """
-    A utility class to load embedding models and LLM models.
+    Loads embedding models and LLMs based on config and environment.
     """
-    
+
     def __init__(self):
-        
-        load_dotenv()
-        self._validate_env()
-        self.config=load_config()
-        log.info("Configuration loaded successfully", config_keys=list(self.config.keys()))
-        
-    def _validate_env(self):
-        """
-        Validate necessary environment variables.
-        Ensure API keys exist.
-        """
-        required_vars=["GOOGLE_API_KEY","GROQ_API_KEY"]
-        self.api_keys={key:os.getenv(key) for key in required_vars}
-        missing = [k for k, v in self.api_keys.items() if not v]
-    
-        if missing:
-            log.error("Missing environment variables", missing_vars=missing)
-            raise DocumentPortalException("Missing environment variables", sys)
-        log.info("Environment variables validated", available_keys=[k for k in self.api_keys if self.api_keys[k]])
-        
+        if os.getenv("ENV", "local").lower() != "production":
+            load_dotenv()
+            log.info("Running in LOCAL mode: .env loaded")
+        else:
+            log.info("Running in PRODUCTION mode")
+
+        self.api_key_mgr = ApiKeyManager()
+        self.config = load_config()
+        log.info("YAML config loaded", config_keys=list(self.config.keys()))
+
     def load_embeddings(self):
         """
-        Load and return the embedding model.
+        Load and return embedding model from Google Generative AI.
         """
         try:
-            log.info("Loading embedding model...")
             model_name = self.config["embedding_model"]["model_name"]
-            return GoogleGenerativeAIEmbeddings(model=model_name)
+            log.info("Loading embedding model", model=model_name)
+            return GoogleGenerativeAIEmbeddings(model=model_name,
+                                                google_api_key=self.api_key_mgr.get("GOOGLE_API_KEY")) #type: ignore
         except Exception as e:
             log.error("Error loading embedding model", error=str(e))
             raise DocumentPortalException("Failed to load embedding model", sys)
+
         
     def load_llm(self):
     
