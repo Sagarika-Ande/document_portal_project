@@ -40,11 +40,8 @@ class IFrame(google.protobuf.message.Message):
     srcdoc: builtins.str
     """Inline HTML"""
     width: builtins.float
-    """Deprecated: Use width_config on Element.proto instead"""
     has_width: builtins.bool
-    """Deprecated: Width is now handled through width_config on Element.proto"""
     height: builtins.float
-    """Deprecated: Use height_config on Element.proto instead"""
     scrolling: builtins.bool
     tab_index: builtins.int
     def __init__(

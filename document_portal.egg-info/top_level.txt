@@ -3,4 +3,5 @@ logger
 model
 prompt
 src
+tests
 utils

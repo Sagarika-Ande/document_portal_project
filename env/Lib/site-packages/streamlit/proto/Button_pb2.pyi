@@ -51,7 +51,6 @@ class Button(google.protobuf.message.Message):
     type: builtins.str
     disabled: builtins.bool
     use_container_width: builtins.bool
-    """DEPRECATED: Use widthConfig on Element.proto instead."""
     icon: builtins.str
     def __init__(
         self,
