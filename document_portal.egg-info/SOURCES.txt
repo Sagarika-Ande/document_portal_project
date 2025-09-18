@@ -21,6 +21,7 @@ src/document_compare/__init__.py
 src/document_compare/document_comparator.py
 src/document_ingestion/__init__.py
 src/document_ingestion/data_ingestion.py
+src/document_ingestion/mm_ingestion.py
 tests/__init__.py
 tests/test_routes.py
 tests/test_unit_cases.py

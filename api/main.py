@@ -1,4 +1,3 @@
-
 import os
 from typing import List, Optional, Any, Dict
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
@@ -8,20 +7,20 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 
+# Import the new FileProcessor class
 from src.document_ingestion.data_ingestion import (
-    DocHandler,
-    DocumentComparator,
+    FileProcessor, # Use FileProcessor instead of DocHandler and DocumentComparator
     ChatIngestor,
-    FaissManager,
+    FaissManager, # FaissManager is still relevant
 )
 from src.document_analyzer.data_analysis import DocumentAnalyzer
 from src.document_compare.document_comparator import DocumentComparatorLLM
 from src.document_chat.retrieval import ConversationalRAG
-from utils.document_ops import FastAPIFileAdapter,read_pdf_via_handler
+from utils.document_ops import FastAPIFileAdapter # read_pdf_via_handler is no longer needed
 
 FAISS_BASE = os.getenv("FAISS_BASE", "faiss_index")
 UPLOAD_BASE = os.getenv("UPLOAD_BASE", "data")
-FAISS_INDEX_NAME = os.getenv("FAISS_INDEX_NAME", "index")  # <--- keep consistent with save_local()
+FAISS_INDEX_NAME = os.getenv("FAISS_INDEX_NAME", "index")
 
 app = FastAPI(title="Document Portal API", version="0.1")
 
@@ -51,33 +50,53 @@ def health() -> Dict[str, str]:
 @app.post("/analyze")
 async def analyze_document(file: UploadFile = File(...)) -> Any:
     try:
-        dh = DocHandler()
-        saved_path = dh.save_pdf(FastAPIFileAdapter(file))
-        text = read_pdf_via_handler(dh, saved_path)
+        # Use FileProcessor instead of DocHandler
+        fp = FileProcessor(base_dir=os.path.join(UPLOAD_BASE, "document_analysis"))
+        
+        # Save the uploaded file (adapting FastAPI's UploadFile)
+        saved_path = fp.save_file(FastAPIFileAdapter(file))
+        
+        # Read the content using the generic read_file method
+        text = fp.read_file(saved_path)
+        
+        if not text:
+            raise HTTPException(status_code=400, detail="Could not extract text from the document.")
+
         analyzer = DocumentAnalyzer()
         result = analyzer.analyze_document(text)
         return JSONResponse(content=result)
     except HTTPException:
         raise
     except Exception as e:
+        # Log the error for debugging
+        print(f"Analysis failed: {e}")
         raise HTTPException(status_code=500, detail=f"Analysis failed: {e}")
 
 # ---------- COMPARE ----------
 @app.post("/compare")
 async def compare_documents(reference: UploadFile = File(...), actual: UploadFile = File(...)) -> Any:
     try:
-        dc = DocumentComparator()
-        ref_path, act_path = dc.save_uploaded_files(
-            FastAPIFileAdapter(reference), FastAPIFileAdapter(actual)
-        )
-        _ = ref_path, act_path
-        combined_text = dc.combine_documents()
+        # Use FileProcessor for document comparison
+        fp = FileProcessor(base_dir=os.path.join(UPLOAD_BASE, "document_compare"))
+        
+        # Save both reference and actual files
+        ref_path = fp.save_file(FastAPIFileAdapter(reference))
+        act_path = fp.save_file(FastAPIFileAdapter(actual))
+        
+        # Combine the text content of all files in the session (which are ref and act)
+        combined_text = fp.combine_documents_in_session()
+        
+        if not combined_text.strip():
+            raise HTTPException(status_code=400, detail="Could not extract text from one or both documents for comparison.")
+
         comp = DocumentComparatorLLM()
         df = comp.compare_documents(combined_text)
-        return {"rows": df.to_dict(orient="records"), "session_id": dc.session_id}
+        return {"rows": df.to_dict(orient="records"), "session_id": fp.session_id}
     except HTTPException:
         raise
     except Exception as e:
+        # Log the error for debugging
+        print(f"Comparison failed: {e}")
         raise HTTPException(status_code=500, detail=f"Comparison failed: {e}")
 
 # ---------- CHAT: INDEX ----------
@@ -98,15 +117,15 @@ async def chat_build_index(
             use_session_dirs=use_session_dirs,
             session_id=session_id or None,
         )
-        # NOTE: ensure your ChatIngestor saves with index_name="index" or FAISS_INDEX_NAME
-        # e.g., if it calls FAISS.save_local(dir, index_name=FAISS_INDEX_NAME)
-        ci.built_retriver(  # if your method name is actually build_retriever, fix it there as well
+        # Assuming ChatIngestor.built_retriver now uses FileProcessor internally as updated previously
+        ci.built_retriver(
             wrapped, chunk_size=chunk_size, chunk_overlap=chunk_overlap, k=k
         )
         return {"session_id": ci.session_id, "k": k, "use_session_dirs": use_session_dirs}
     except HTTPException:
         raise
     except Exception as e:
+        print(f"Indexing failed: {e}") # Log the error
         raise HTTPException(status_code=500, detail=f"Indexing failed: {e}")
 
 # ---------- CHAT: QUERY ----------
@@ -126,7 +145,7 @@ async def chat_query(
             raise HTTPException(status_code=404, detail=f"FAISS index not found at: {index_dir}")
 
         rag = ConversationalRAG(session_id=session_id)
-        rag.load_retriever_from_faiss(index_dir, k=k, index_name=FAISS_INDEX_NAME)  # build retriever + chain
+        rag.load_retriever_from_faiss(index_dir, k=k, index_name=FAISS_INDEX_NAME)
         response = rag.invoke(question, chat_history=[])
 
         return {
@@ -138,11 +157,11 @@ async def chat_query(
     except HTTPException:
         raise
     except Exception as e:
+        print(f"Query failed: {e}") # Log the error
         raise HTTPException(status_code=500, detail=f"Query failed: {e}")
 
 
-# 
-# command for executing the fast api
-# uvicorn api.main:app --reload
-# uvicorn api.main:app --port 8080 --reload    
-#uvicorn api.main:app --host 0.0.0.0 --port 8080 --reload
+if __name__ == "__main__":
+    import uvicorn
+    # Make sure to run from the project root or adjust the import path for uvicorn
+    uvicorn.run("src.api.main:app", host="0.0.0.0", port=8080, reload=True) # Changed to 0.0.0.0 and port 8080 for broader access
