@@ -66,3 +66,10 @@ git clone https://github.com/sunnysavita10/document_portal.git
 - [Get your API Key](https://aistudio.google.com/apikey)  
 - [Gemini Documentation](https://ai.google.dev/gemini-api/docs/models)
 
+
+### Reference websites on RAG
+- chunkviz.up.raiway.app
+- ploars
+- docling
+- lamaparse
+- docs.chonike.ai
