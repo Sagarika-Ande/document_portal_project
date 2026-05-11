@@ -1,12 +1,40 @@
 import os
 import sys
 import json
+from typing import List, Optional, Any, Dict
 from dotenv import load_dotenv
+from langchain_core.embeddings import Embeddings
 from utils.config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 from logger import GLOBAL_LOGGER as log
 from exception.custom_exception import DocumentPortalException
+
+
+class HuggingFaceSentenceTransformerEmbeddings(Embeddings):
+    def __init__(self, model_name: str):
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ImportError as e:
+            raise DocumentPortalException(
+                "SentenceTransformer is required for HuggingFace embeddings but is not installed.",
+                e,
+            ) from e
+        self.model = SentenceTransformer(model_name)
+
+    def embed_documents(self, texts: List[str]) -> List[List[float]]:
+        embeddings = self.model.encode(texts, show_progress_bar=False)
+        return [list(map(float, emb)) for emb in embeddings]
+
+    def embed_query(self, text: str) -> List[float]:
+        embedding = self.model.encode([text], show_progress_bar=False)[0]
+        return list(map(float, embedding))
+
+    async def aembed_documents(self, texts: List[str]) -> List[List[float]]:
+        return self.embed_documents(texts)
+
+    async def aembed_query(self, text: str) -> List[float]:
+        return self.embed_query(text)
 
 
 class ApiKeyManager:
@@ -68,13 +96,28 @@ class ModelLoader:
 
     def load_embeddings(self):
         """
-        Load and return embedding model from Google Generative AI.
+        Load and return the configured embedding model.
         """
         try:
-            model_name = self.config["embedding_model"]["model_name"]
-            log.info("Loading embedding model", model=model_name)
-            return GoogleGenerativeAIEmbeddings(model=model_name,
-                                                google_api_key=self.api_key_mgr.get("GOOGLE_API_KEY")) #type: ignore
+            model_block = self.config.get("embedding_model", {})
+            provider = model_block.get("provider", "google").lower()
+            model_name = model_block.get("model_name")
+            if not model_name:
+                raise ValueError("Missing embedding_model.model_name in config")
+
+            log.info("Loading embedding model", provider=provider, model=model_name)
+
+            if provider == "google":
+                return GoogleGenerativeAIEmbeddings(
+                    model=model_name,
+                    google_api_key=self.api_key_mgr.get("GOOGLE_API_KEY"),
+                )
+            elif provider == "huggingface":
+                return HuggingFaceSentenceTransformerEmbeddings(model_name=model_name)
+            else:
+                log.error("Unsupported embedding provider", provider=provider)
+                raise ValueError(f"Unsupported embedding provider: {provider}")
+
         except Exception as e:
             log.error("Error loading embedding model", error=str(e))
             raise DocumentPortalException("Failed to load embedding model", sys)
